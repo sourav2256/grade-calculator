@@ -1,11 +1,10 @@
 package com.sourav.calculator.annotation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-import java.util.ArrayList;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class ScoreValidator implements ConstraintValidator<Score, String> {
 
