@@ -3,14 +3,10 @@ package com.sourav.calculator.controller;
 import com.sourav.calculator.model.Grade;
 import com.sourav.calculator.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +26,7 @@ public class GradeController {
     @GetMapping("/grades/v1")
     //@ResponseStatus(HttpStatus.BAD_GATEWAY)
     public List<Grade> getGrades() {
-        return gradeService.getData();
+        return gradeService.getGrades();
     }
 
     @GetMapping("/grades/{name}")

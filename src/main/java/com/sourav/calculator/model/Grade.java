@@ -1,8 +1,9 @@
 package com.sourav.calculator.model;
 
 import com.sourav.calculator.annotation.Score;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.UUID;
 
 public class Grade {

@@ -12,7 +12,7 @@ public class GradeRepo {
     List<Grade> lists = new ArrayList<>();
 
     public Grade findBy(String name) {
-        for(Grade grade: lists) {
+        for(Grade grade: getGrades()) {
             if(grade.getName().equals(name))
                 return grade;
         }
@@ -23,7 +23,7 @@ public class GradeRepo {
         lists.add(grade);
     }
 
-    public List<Grade> getData() {
+    public List<Grade> getGrades() {
         return lists;
     }
 

@@ -21,25 +21,25 @@ public class GradeService {
         return gradeRepo.findBy(name);
     }
 
-    public Grade findByName(String name) {
-        for(Grade grade: gradeRepo.getData()) {
-            if(grade.getName().equals(name))
-                return grade;
-        }
-        return null;
-    }
+//    public Grade findByName(String name) {
+//        for(Grade grade: gradeRepo.getGrades()) {
+//            if(grade.getName().equals(name))
+//                return grade;
+//        }
+//        return null;
+//    }
 
     public void add(Grade grade) {
         gradeRepo.add(grade);
     }
 
 
-    public List<Grade> getData() {
-        return gradeRepo.getData();
+    public List<Grade> getGrades() {
+        return gradeRepo.getGrades();
     }
 
     public String handleSubmit(Grade grade) {
-        Grade getGrade = findByName(grade.getName());
+        Grade getGrade = findBy(grade.getName());
         String status = GradeConstant.FAILED_STATUS;;
         if(getGrade == null) {
             add(grade);
