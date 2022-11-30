@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class GradeRepo {
-    List<Grade> lists = new ArrayList<>();
+    List<Grade> grades = new ArrayList<>();
 
     public Grade findBy(String name) {
         for(Grade grade: getGrades()) {
@@ -19,12 +19,19 @@ public class GradeRepo {
         return null;
     }
 
-    public void add(Grade grade) {
-        lists.add(grade);
+    public void addGrades(Grade grade) {
+        grades.add(grade);
     }
 
     public List<Grade> getGrades() {
-        return lists;
+        return grades;
+    }
+
+    public void updateGrade(int index, Grade grade) {
+        grades.set(index, grade);
+    }
+    public Grade getGrades(int index) {
+        return grades.get(index);
     }
 
 }

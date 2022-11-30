@@ -27,6 +27,7 @@ public class Grade {
         this.score = score;
         this.subject = subject;
         this.fullMarks = fullMarks;
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getName() {

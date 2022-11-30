@@ -20,17 +20,8 @@ public class GradeService {
     public Grade findBy(String name) {
         return gradeRepo.findBy(name);
     }
-
-//    public Grade findByName(String name) {
-//        for(Grade grade: gradeRepo.getGrades()) {
-//            if(grade.getName().equals(name))
-//                return grade;
-//        }
-//        return null;
-//    }
-
     public void add(Grade grade) {
-        gradeRepo.add(grade);
+        gradeRepo.addGrades(grade);
     }
 
 
@@ -44,6 +35,26 @@ public class GradeService {
         if(getGrade == null) {
             add(grade);
             status = GradeConstant.SUCCESS_STATUS;
+        }
+        return status+grade;
+    }
+
+    public int getGradeIndex(String id) {
+        for (int i = 0; i < getGrades().size(); i++) {
+            if (getGrades().get(i).getId().equals(id)) return i;
+        }
+        return GradeConstant.NOT_FOUND;
+    }
+
+    public String handleSubmit1(Grade grade) {
+        int index = getGradeIndex(grade.getId());
+        String status = GradeConstant.FAILED_STATUS;;
+        if(index == GradeConstant.NOT_FOUND) {
+            add(grade);
+            status = GradeConstant.SUCCESS_STATUS;
+        }
+        else {
+            gradeRepo.updateGrade(index, grade);
         }
         return status+grade;
     }

@@ -57,6 +57,18 @@ public class GradeServiceTest {
 
         gradeService.handleSubmit(newGrade);
 
-        verify(gradeRepo, times(0)).add(newGrade);
+        verify(gradeRepo, times(0)).addGrades(newGrade);
+    }
+
+    @Test
+    public void updateGradeTest() {
+
+        Grade newGrade = new Grade("Sourav", "90", "DSA", 100);
+        when(gradeRepo.getGrades()).thenReturn(Arrays.asList(newGrade));
+        when(gradeRepo.getGrades(0)).thenReturn(newGrade);
+
+        gradeService.handleSubmit1(newGrade);
+
+        verify(gradeRepo, times(1)).updateGrade(0, newGrade);
     }
 }
