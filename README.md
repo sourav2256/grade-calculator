@@ -12,5 +12,5 @@ Maven
 2. Resources - https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 
 Spring Basics
-1. Resources - https://www.baeldung.com/ , https://docs.spring.io/spring-framework/docs/current/reference/html/
+1. Resources - https://docs.spring.io/spring-framework/docs/current/reference/html/ , https://www.baeldung.com/
 
