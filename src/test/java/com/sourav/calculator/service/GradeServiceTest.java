@@ -22,7 +22,7 @@ public class GradeServiceTest {
     private GradeRepo gradeRepo;
 
     @InjectMocks
-    private GradeService gradeService;
+    private GradeServiceImpl gradeService;
 
     // when the service calls gradeRepository.gerGrades(), then it should return a list of grades
     @Test
