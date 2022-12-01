@@ -5,6 +5,7 @@ import com.sourav.calculator.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -49,13 +50,13 @@ public class GradeController {
         return gradeService.handleSubmit(grade);
     }
 
-    @PostMapping("/grades")
+    @PostMapping("/grades/v1")
     public ResponseEntity<Grade> submitGrades1(@Valid @RequestBody Grade grade, BindingResult result) {
         System.out.println(result.hasErrors());
 //        if(grade.getDiscount() > grade.getPrice())
 //            result.rejectValue("price", "4xx", "Invalid");
-        System.out.println(result.hasErrors());
-        gradeService.handleSubmit(grade);
+        if(!result.hasErrors())
+            gradeService.handleSubmit(grade);
         return new ResponseEntity<>(HttpStatus.CREATED);
         //return ResponseEntity.status().body();
     }

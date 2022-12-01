@@ -12,11 +12,10 @@ import java.util.List;
 @ConditionalOnProperty(name = "server.port", havingValue = "9090")
 public class GradeServiceImpl1 implements GradeService {
 
-//    @Autowired
-    GradeRepo gradeRepo;
-    public GradeServiceImpl1(GradeRepo gradeRepo) {
-        this.gradeRepo = gradeRepo;
-    }
+    GradeRepo gradeRepo = new GradeRepo();
+    //public GradeServiceImpl1(GradeRepo gradeRepo) {
+        //this.gradeRepo = gradeRepo;
+    //}
     public Grade findBy(String name) {
         return gradeRepo.findBy(name);
     }
