@@ -18,7 +18,6 @@ import java.util.Optional;
 public class GradeController {
 
     @Autowired
-    @Qualifier("gradeServiceImpl")
     GradeService gradeService;
 
     @GetMapping("/grades")
