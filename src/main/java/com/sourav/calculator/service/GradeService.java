@@ -6,11 +6,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface GradeService {
-    List<Grade> getGrades();
+    public List<Grade> getGrades(Long studentId, Long courseId);
 
-    Grade findBy(String name);
+    public Grade saveGrade(Grade grade, Long studentId, Long courseId);
 
-    String handleSubmit(Grade grade);
+    public Grade updateGrade(String score, Long studentId, Long courseId);
 
-    void updateGrade(String id, Grade grade);
 }

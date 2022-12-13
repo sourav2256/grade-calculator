@@ -1,8 +1,10 @@
 package com.sourav.calculator.service;
 
 import com.sourav.calculator.Repository.GradeRepo;
+import com.sourav.calculator.Repository.StudentRepo;
 import com.sourav.calculator.constant.GradeConstant;
 import com.sourav.calculator.model.Grade;
+import com.sourav.calculator.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Primary;
@@ -13,57 +15,28 @@ import java.util.List;
 @Service("gradeServiceImpl")
 @ConditionalOnProperty(name = "server.port", havingValue = "8080")
 //@Primary
-public class GradeServiceImpl implements GradeService{
+public class GradeServiceImpl implements GradeService {
 
     @Autowired
     GradeRepo gradeRepo;
-    public GradeServiceImpl(GradeRepo gradeRepo) {
-        this.gradeRepo = gradeRepo;
-        System.out.println("#####");
-    }
-    public Grade findBy(String name) {
-        return gradeRepo.findBy(name);
-    }
-    public void add(Grade grade) {
-        gradeRepo.addGrades(grade);
+
+    @Autowired
+    StudentRepo studentRepo;
+
+    @Override
+    public List<Grade> getGrades(Long studentId, Long courseId) {
+        return gradeRepo.findByStudentId(studentId);
     }
 
-
-    public List<Grade> getGrades() {
-        return gradeRepo.getGrades();
+    @Override
+    public Grade saveGrade(Grade grade, Long studentId, Long courseId) {
+        Student student = studentRepo.findById(studentId).get();
+        grade.setStudent(student);
+        return gradeRepo.save(grade);
     }
 
-    public String handleSubmit(Grade grade) {
-        Grade getGrade = findBy(grade.getName());
-        String status = GradeConstant.FAILED_STATUS;;
-        if(getGrade == null) {
-            add(grade);
-            status = GradeConstant.SUCCESS_STATUS;
-        }
-        return status+grade;
-    }
-
-    public void updateGrade(String id, Grade grade) {
-        gradeRepo.updateGrade(getGradeIndex(id), grade);
-    }
-
-    public int getGradeIndex(String id) {
-        for (int i = 0; i < getGrades().size(); i++) {
-            if (getGrades().get(i).getId().equals(id)) return i;
-        }
-        return GradeConstant.NOT_FOUND;
-    }
-
-    public String handleSubmit1(Grade grade) {
-        int index = getGradeIndex(grade.getId());
-        String status = GradeConstant.FAILED_STATUS;;
-        if(index == GradeConstant.NOT_FOUND) {
-            add(grade);
-            status = GradeConstant.SUCCESS_STATUS;
-        }
-        else {
-            gradeRepo.updateGrade(index, grade);
-        }
-        return status+grade;
+    @Override
+    public Grade updateGrade(String score, Long studentId, Long courseId) {
+        return null;
     }
 }
