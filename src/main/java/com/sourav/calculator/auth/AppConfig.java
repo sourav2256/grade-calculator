@@ -1,6 +1,5 @@
-package com.sourav.calculator.configuration;
+package com.sourav.calculator.auth;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
