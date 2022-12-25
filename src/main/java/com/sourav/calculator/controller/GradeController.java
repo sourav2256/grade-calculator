@@ -28,7 +28,7 @@ public class GradeController {
             return new ResponseEntity<>(grade.get(), HttpStatus.OK);
         }
         else {
-            throw new RecordNotFoundException();
+            throw new IllegalStateException("Customer " + name +" not found");
         }
     }
 
