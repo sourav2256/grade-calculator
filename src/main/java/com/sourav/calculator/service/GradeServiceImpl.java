@@ -47,6 +47,11 @@ public class GradeServiceImpl implements GradeService{
         gradeRepo.updateGrade(getGradeIndex(id), grade);
     }
 
+    @Override
+    public void deleteGrade(String id) {
+        gradeRepo.deleteGrade(id);
+    }
+
     public int getGradeIndex(String id) {
         for (int i = 0; i < getGrades().size(); i++) {
             if (getGrades().get(i).getId().equals(id)) return i;

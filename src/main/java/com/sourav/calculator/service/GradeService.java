@@ -13,4 +13,6 @@ public interface GradeService {
     String handleSubmit(Grade grade);
 
     void updateGrade(String id, Grade grade);
+
+    void deleteGrade(String id);
 }

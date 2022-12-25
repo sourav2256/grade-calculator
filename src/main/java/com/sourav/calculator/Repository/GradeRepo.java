@@ -34,4 +34,10 @@ public class GradeRepo {
         return grades.get(index);
     }
 
+    public void deleteGrade(String id) {
+        for(Grade grade: getGrades()) {
+            if(grade.getId() == id)
+                grades.remove(grade);
+        }
+    }
 }

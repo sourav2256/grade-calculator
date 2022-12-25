@@ -65,4 +65,10 @@ public class GradeController {
         gradeService.updateGrade(id, grade);
         return new ResponseEntity<>(grade, HttpStatus.OK);
     }
+
+    @DeleteMapping("/grades/{id}")
+    public ResponseEntity<Grade> deleteGrade (@PathVariable String id) {
+        gradeService.deleteGrade(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
