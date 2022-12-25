@@ -1,11 +1,12 @@
 package com.sourav.calculator.controller;
 
+import com.sourav.calculator.excption.ApiRequestException;
+import com.sourav.calculator.excption.RecordNotFoundException;
+import com.sourav.calculator.excption.ServerException;
 import com.sourav.calculator.model.Grade;
 import com.sourav.calculator.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +23,14 @@ public class GradeController {
 
     @GetMapping("/grades")
     //@ResponseStatus(HttpStatus.BAD_GATEWAY)
-    public Optional<Grade> getGrades(@RequestParam(required = false) String name) {
-        Optional<Grade> grade = Optional.ofNullable(gradeService.findBy(name));
-        return grade;
+    public ResponseEntity<Grade> getGrades(@RequestParam(required = false) String name) {
+        Optional<Grade> grade = gradeService.findBy(name);
+        if (grade.isPresent()) {
+            return new ResponseEntity<>(grade.get(), HttpStatus.OK);
+        }
+        else {
+            throw new IllegalStateException("Customer " + name +" not found");
+        }
     }
 
     @GetMapping("/grades/all")
@@ -36,17 +42,27 @@ public class GradeController {
     @GetMapping("/grades/{name}")
     //@ResponseStatus(HttpStatus.BAD_GATEWAY)
     public Optional<Grade> getGradesByName(@PathVariable String name) {
-        Optional<Grade> grade = Optional.ofNullable(gradeService.findBy(name));
-        return grade;
+        Optional<Grade> grade = gradeService.findBy(name);
+        if(grade.isPresent()){
+            return grade;
+        } else {
+            throw new ApiRequestException("Customer: " + name +" not found");
+        }
     }
 
     @PostMapping("/grades")
-    public String submitGrades(@Valid @RequestBody Grade grade, BindingResult result) {
+    public ResponseEntity<Grade> submitGrades(@Valid @RequestBody Grade newUser, BindingResult result) {
         System.out.println(result.hasErrors());
 //        if(grade.getDiscount() > grade.getPrice())
 //            result.rejectValue("price", "4xx", "Invalid");
         System.out.println(result.hasErrors());
-        return gradeService.handleSubmit(grade);
+        Grade grade = gradeService.handleSubmit(newUser);
+        if (grade == null) {
+            throw new ServerException();
+        }
+        else {
+            return new ResponseEntity<>(grade, HttpStatus.CREATED);
+        }
     }
 
     @PostMapping("/grades/v1")

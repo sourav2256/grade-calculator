@@ -42,8 +42,8 @@ public class GradeServiceTest {
         when(gradeRepo.getGrades()).thenReturn(Arrays.asList(grade));
         when(gradeRepo.findBy(grade.getName())).thenReturn(grade);
 
-        Grade valid = gradeService.findBy(grade.getName());
-        Grade InValid = gradeService.findBy("123");
+        Grade valid = gradeService.findBy(grade.getName()).get();
+        Grade InValid = gradeService.findBy("123").get();
         Assert.assertEquals("Harry", valid.getName());
         Assert.assertEquals(null, InValid);
     }

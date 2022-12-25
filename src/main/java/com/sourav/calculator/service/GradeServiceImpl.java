@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("gradeServiceImpl")
 @ConditionalOnProperty(name = "server.port", havingValue = "8080")
@@ -21,8 +22,8 @@ public class GradeServiceImpl implements GradeService{
         this.gradeRepo = gradeRepo;
         System.out.println("#####");
     }
-    public Grade findBy(String name) {
-        return gradeRepo.findBy(name);
+    public Optional<Grade> findBy(String name) {
+        return Optional.ofNullable(gradeRepo.findBy(name));
     }
     public void add(Grade grade) {
         gradeRepo.addGrades(grade);
@@ -33,14 +34,14 @@ public class GradeServiceImpl implements GradeService{
         return gradeRepo.getGrades();
     }
 
-    public String handleSubmit(Grade grade) {
-        Grade getGrade = findBy(grade.getName());
+    public Grade handleSubmit(Grade grade) {
+        Optional<Grade> getGrade = findBy(grade.getName());
         String status = GradeConstant.FAILED_STATUS;;
         if(getGrade == null) {
             add(grade);
             status = GradeConstant.SUCCESS_STATUS;
         }
-        return status+grade;
+        return grade;
     }
 
     public void updateGrade(String id, Grade grade) {
