@@ -1,5 +1,6 @@
 package com.sourav.calculator.controller;
 
+import com.sourav.calculator.excption.ApiRequestException;
 import com.sourav.calculator.excption.RecordNotFoundException;
 import com.sourav.calculator.excption.ServerException;
 import com.sourav.calculator.model.Grade;
@@ -42,7 +43,11 @@ public class GradeController {
     //@ResponseStatus(HttpStatus.BAD_GATEWAY)
     public Optional<Grade> getGradesByName(@PathVariable String name) {
         Optional<Grade> grade = gradeService.findBy(name);
-        return grade;
+        if(grade.isPresent()){
+            return grade;
+        } else {
+            throw new ApiRequestException("Customer: " + name +" not found");
+        }
     }
 
     @PostMapping("/grades")
