@@ -19,7 +19,7 @@ import lombok.Setter;
 /*
  * 'user' is a reserved keyword in SQL, so we name our table users. If you name it user, you will get a org.h2.jdbc.JdbcSQLSyntaxErrorException. 
  *  See https://docs.microsoft.com/en-us/sql/t-sql/language-elements/reserved-keywords-transact-sql?view=sql-server-ver16 for a list of reserved keywords.
- */
+ */ 
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -39,7 +39,5 @@ public class User {
     @NonNull
 	@Column(nullable = false)
 	private String password;
-
-
 
 }

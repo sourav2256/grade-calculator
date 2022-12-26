@@ -25,13 +25,12 @@ public class UserController {
     UserService userService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<String> findById(@PathVariable Long id) {
-		return new ResponseEntity<>(userService.getUser(id).getUsername(), HttpStatus.OK);
+	public ResponseEntity<User> findById(@PathVariable Long id) {
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
     @PostMapping("/register")
-	public ResponseEntity<HttpStatus> createUser(@Valid @RequestBody User user) {
-		userService.saveUser(user);
+	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
