@@ -18,10 +18,6 @@ public class Grade {
 
     private String id;
 
-    public Grade() {
-        this.id = UUID.randomUUID().toString();
-    }
-
     public Grade(String name, String score, String subject, int fullMarks) {
         this.name = name;
         this.score = score;
